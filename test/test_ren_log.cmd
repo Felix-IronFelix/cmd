@@ -1,0 +1,19 @@
+@ECHO OFF
+
+SETLOCAL
+SET ARCHPATH=D:\Temp\4
+SET LOG=%ARCHPATH%\%1%_log.log
+SET REN_LIST=%ARCHPATH%\ren_list.txt
+
+ECHO REN_LIST=%REN_LIST%
+ECHO LOG=%LOG%
+ECHO %LOG% > %REN_LIST%
+
+IF NOT EXIST %LOG% GOTO END
+
+FOR /F %%f in ('TYPE %REN_LIST%') DO (
+IF EXIST %%f.bak DEL %%f.bak
+IF EXIST %%f REN %%f %%~nxf.bak
+)
+
+:END

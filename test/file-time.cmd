@@ -1,0 +1,17 @@
+@ECHO OFF
+SETLOCAL
+SET NOW_TIME=%TIME:~0,2%%TIME:~3,2%
+SET NOW_DATE=%DATE:~-4%%DATE:~3,2%%DATE:~0,2%
+SET NOW=%NOW_DATE%-%NOW_TIME%
+SET DAY=%DATE:~0,2%
+
+ECHO TIME = %NOW_TIME%
+ECHO DATE = %NOW_DATE%
+ECHO NOW = %NOW%
+ECHO DAY = %DAY%
+
+IF %DAY% == 01 (
+   ECHO Today is a first day
+) ELSE (
+   ECHO Today is NOT a first day
+)   
