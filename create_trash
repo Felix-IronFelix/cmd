@@ -1,0 +1,23 @@
+REM В аккаунтах POP3 Mozilla Thunderbird иногда пропадает папка "Удалённые"
+REM и сообщения невозможно удалить.
+REM Чтобы решить проблему, нужно закрыть Thunderbird, создать в каталоге
+REM с файлами нужного аккаунта файл Trash, и снова запустить Thunderbird.
+REM Данный скрипт, запускаемый каждое утро планировщиком, проверит и создаст,
+REM при необходимости, файл Trash.
+REM А если его запустить с параметром START, то ещё и снова запустит Thunderbird.
+
+@ECHO OFF
+
+IF NOT EXIST "d:\home\user\Thunderbird\Profiles\kpya8y83.default\Mail\mail.mydomain.ru\Trash" (
+   TYPE nul > "d:\home\user\Thunderbird\Profiles\kpya8y83.default\Mail\mail.mydomain.ru\Trash"
+   ECHO =====================================  >> %~dp0\create_trash.log
+   ECHO File "Trash" successfully created at >> %~dp0\create_trash.log
+   DATE /t  >> %~dp0\create_trash.log
+   TIME /t  >> %~dp0\create_trash.log
+   )
+
+IF "%1" == "" GOTO END
+
+START "" "C:\Program Files (x86)\Mozilla Thunderbird\thunderbird.exe"
+   
+:END
